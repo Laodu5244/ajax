@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>取消请求</title>
+</head>
+<body>
+  <h3>取消请求</h3>
+  <button id="btn">获取后台数据</button>
+  <button id="btn2">取消请求</button>
+  <div class="content" id="content"></div>
+
+  <script>
+    function el(el) {
+      return document.getElementById(el)
+    }
+    let btn = el('btn'),
+      content = el('content'),
+      btn2 = el('btn2'); 
+    let xhr; 
+
+    btn.onclick =()=>{
+      // 实例xhr
+      xhr  = new XMLHttpRequest()
+
+      // 绑定监听
+      xhr.onreadystatechange =()=>{
+        if(xhr.readyState === 4){
+          if(xhr.status >= 200 && xhr.status <300){
+            console.log(xhr.response)
+            const {name,age,sex} = xhr.response
+            content.innerHTML = (`
+            <ul>
+              <li>姓名:${name}</li>
+              <li>年龄:${age}</li>
+              <li>性别:${sex}</li>
+            </ul>`)
+          }
+        }
+      }
+
+      // 配置请求
+      xhr.open('GET','http://127.0.0.1:3000/get3_delay')
+      // responseType用于指定返回数据的格式
+      xhr.responseType = 'json'
+
+      // 配置出错的回调
+      xhr.onerror =()=>{
+        alert('网络异常')
+      }
+
+      // 配置超时的回调
+      xhr.timeout = 2000
+      xhr.ontimeout = ()=>{
+        alert('网速不给力')
+      }
+      
+      // 发送请求
+      xhr.send()
+    }
+
+   btn2.onclick=()=>{
+    // abort: 取消请求
+    xhr.abort()
+   }
+  </script>
+
+  <style>
+    .content {
+      width: 300px;
+      height: 100px;
+      border: 1px solid firebrick;
+      margin-top: 20px;
+    }
+  </style>
+</body>
+</html>
