@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>jquery封装的jsonp</title>
+</head>
+
+<body>
+  <h2>jquery封装的jsonp</h2>
+  <button id="btn">点击获取数据</button>
+
+  <script src="./js/jquery.min.js"></script>
+  <script>
+    let btn = $('#btn')
+    btn.click(() => {
+      $.getJSON('http://localhost:3030/jsonp?callback=?', {}, (data) => {
+        console.log(data)
+      })
+    })
+  </script>
+
+</body>
+
+</html>

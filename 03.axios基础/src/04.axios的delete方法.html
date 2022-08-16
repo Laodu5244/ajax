@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>axios的delete方法</title>
+</head>
+
+<body>
+  <button id="btn">获取所有信息</button>
+  <hr>
+  <input id="fruitId" type="text" placeholder="请输入水果id">
+  <button id="btn1">删除水果</button>
+
+  <script src="./js/axios.min.js"></script>
+  <script>
+    function el(el) {
+      return document.getElementById(el)
+    }
+    let btn = el('btn')
+    let btn1 = el('btn1')
+    let fruitId = el('fruitId')
+
+    btn.onclick = () => {
+      axios.get('http://localhost:3000/fruits').then((response) => {
+        console.log('请求成功了', response.data)
+      })
+    }
+
+    // 发送delete请求,删除一个水果,携带params参数
+    btn1.onclick = () => {
+      // 完整写法
+      axios({
+        url: `http://localhost:3000/fruits/${fruitId.value}`,
+        method: 'DELETE',
+      }).then(
+        response => { console.log('请求成功了', response.data) },
+        error => { console.log('请求失败了', error)}
+      )
+
+      // 精简写法
+      // axios.delete('http://localhost:3000/fruits', {
+      //   name: name.value,
+      //   price: price.value,
+      //   id: fruitId.value,
+      // }).then(
+      //   response => { console.log('请求成功了', response.data) },
+      //   error => { console.log('请求失败了', error)}
+      // )
+    }
+
+
+
+  </script>
+</body>
+
+</html>

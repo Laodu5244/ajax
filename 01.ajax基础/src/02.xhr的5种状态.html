@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>xhr的5种状态</title>
+</head>
+
+<body>
+  <h3>xhr的5种状态</h3>
+  <button id="btn">获取后台数据</button>
+  <div class="content" id="content"></div>
+
+  <script>
+    function el(el) {
+      return document.getElementById(el)
+    }
+    let btn = el('btn'), content = el('content')
+
+    // 绑定监听事件
+    btn.onclick = () => {
+      // 1.创建xhr实例对象
+      let xhr = new XMLHttpRequest()
+      /* 
+        xhr内部有五种状态: 0,1,2,3,4(4是完成响应)
+        0: 实例出来时的初始状态
+        1: open已经调用了,send还没调用,此时可以修改请求头
+        2: send已经调用了,已经不能修改请求头
+        3: 已经回来一部分数据了(响应头已经回来)
+        4: 数据全部接收完毕
+      */
+      xhr.onreadystatechange = () => {
+        /* if (xhr.readyState == 1) {
+          // 配置请求头
+          xhr.setRequestHeader('xhr1', 12345) 
+        } */
+        /* if (xhr.readyState == 2) {
+          // 报错 已经不能修改请求头
+          xhr.setRequestHeader('xhr2', 12345) 
+        } */
+        /* if (xhr.readyState == 3) {
+          // 获取所有响应头
+          console.log('xhr3', xhr.getAllResponseHeaders())
+        } */
+        if (xhr.readyState == 4 && xhr.status === 200) {
+          content.innerHTML = xhr.response
+        }
+      }
+
+      // 2.指定发送请求的method,url
+      xhr.open('GET', 'http://127.0.0.1:3000/get')
+      // 3.发送请求
+      xhr.send()
+    }
+  </script>
+
+  <style>
+    .content {
+      width: 300px;
+      height: 100px;
+      border: 1px solid firebrick;
+      margin-top: 20px;
+    }
+  </style>
+</body>
+
+</html>

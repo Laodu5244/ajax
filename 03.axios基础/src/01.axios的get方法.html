@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>axios的基本使用</title>
+</head>
+
+<body>
+  <button id="btn1">获取所有信息</button><br><br>
+  <div>
+    <input id="fruit_id" type="text" placeholder="请输入id">
+    <button id="btn2">获取某个信息</button>
+  </div>
+  <!-- 
+    1. axios调用的返回值是promise实例
+    2. 成功的值叫response,失败的值叫error
+    3. axios请求成功后,真正的值在response.data中
+    4. 携带query参数,配置项写的是params参数
+   -->
+  <script src="./js/axios.min.js"></script>
+  <script>
+    function el(el) {
+      return document.getElementById(el)
+    }
+    let btn1 = el('btn1')
+    let btn2 = el('btn2')
+    let fruitId = el('fruit_id')
+
+    // 发送GET请求,获取所有信息,不携带参数
+    btn1.onclick = () => {
+      // 完整写法
+      /* axios({
+        // 请求地址
+        url: 'http://localhost:3000/fruits',
+        // 超时时间
+        timeout:2000,
+        // 请求方式
+        method: 'GET',
+      }).then(
+        response => { console.log('请求成功了', response) },
+        error => { console.log('请求失败了', error) }
+      ) */
+
+      // 精简写法
+      axios.get('http://localhost:3000/fruits').then(
+        response => { console.log('请求成功了', response.data) },
+        error => { console.log('请求失败了', error) }
+      )
+    }
+
+    // 发送GET请求,获取某个信息,携带query参数
+    btn2.onclick = () => {
+      // 完整写法
+      /* axios({
+        url:'http://localhost:3000/fruits',
+        method:"GET",
+        // 此处写的是params,但携带的是query参数
+        params:{id:fruitId.value}
+      }).then(
+        response => { console.log('请求成功了', response.data) },
+        error => { console.log('请求失败了', error) }
+      ) */
+
+      // 精简写法
+      axios.get('http://localhost:3000/fruits',{params:{id:fruitId.value}}).then(
+        response => { console.log('请求成功了', response.data) },
+        error => { console.log('请求失败了', error) }
+      )
+    } 
+
+    
+
+  </script>
+</body>
+
+</html>

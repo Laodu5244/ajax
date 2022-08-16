@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>axios的put方法</title>
+</head>
+
+<body>
+  <h2>put方法有问题,可能是json-server不支持put</h2>
+  <h2>这里换了api doc后端接口</h2>
+  <button id="btn">获取所有信息</button>
+  <hr>
+  <input id="fruitId" type="text" placeholder="请输入水果id">
+  <input id="name" type="text" placeholder="请输入水果名">
+  <input id="age" type="number" placeholder="请输入水果价格">
+  <button id="btn1">更新水果</button>
+
+  <script src="./js/axios.min.js"></script>
+  <script>
+    function el(el) {
+      return document.getElementById(el)
+    }
+    let btn = el('btn')
+    let btn1 = el('btn1')
+    let fruitId = el('fruitId')
+    let name = el('name')
+    let age = el('age')
+
+    btn.onclick = () => {
+      axios.get('http://localhost:5000/persons').then((response) => {
+        console.log('请求成功了', response.data)
+      })
+    }
+
+    // 发送PUT请求,添加一个水果,携带json编码的参数
+    btn1.onclick = () => {
+      axios({
+        url: 'http://localhost:5000/person',
+        method: 'PUT',
+        // 携带请求体参数(默认是json编码)
+        data: {
+          id: fruitId.value,
+          name: name.value,
+          age: age.value,
+        }
+      }).then(
+        response => { console.log('请求成功了', response.data) },
+        error => { console.log('请求失败了', error) }
+      )
+    }
+
+  </script>
+</body>
+
+</html>

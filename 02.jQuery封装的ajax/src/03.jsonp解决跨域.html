@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>jsonp解决跨域</title>
+</head>
+
+<body>
+  <h2>用jsonp解决跨域问题</h2>
+  <button id="btn">点击获取数据</button>
+
+  <script>
+
+    const btn = document.getElementById('btn')
+    btn.onclick = () => {
+      const scriptNode = document.createElement('script')
+      scriptNode.src = 'http://localhost:3030/jsonp?callback=test'
+      document.body.appendChild(scriptNode)
+      window.test = (a) => {
+        console.log(a)
+      }
+      // 移除已经使用过的script节点
+      document.body.removeChild(scriptNode)
+    }
+  </script>
+</body>
+
+</html>
