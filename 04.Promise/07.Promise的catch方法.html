@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  
+</head>
+<body>
+  <script>
+    const p = new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        reject(100)
+      }, 1000)    
+    }).then(resolve =>{
+      console.log('成功了',resolve)
+      // catch专门指定失败的函数
+    }).catch((reject)=>{
+      console.log('失败了',reject)
+    })
+  </script>
+</body>
+</html>

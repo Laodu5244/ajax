@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 演示: ReferenceError :引用的变量不存在
+    /* console.log(a) */
+
+    // 演示: typeError:数据类型不正确
+    /* let demo = () => {}
+    demo()() */
+
+    // 演示: RangeError:数据不在其所允许的范围内(死循环)
+    /* let demo = () => { demo() }
+    demo() */
+
+    // 演示: syntaxError:语法错误
+    /* console.log(1; */
+
+    // 如何捕获一个错误
+    /* try{
+      console.log(1)
+      console.log(a)
+      console.log(2)
+    }catch(error){
+      console.log(error)
+    } */
+
+    // 如何抛出一个错误
+    function demo(){
+      let date = Date.now()
+      if(date % 2 === 0){
+        console.log('偶数,正常工作')
+      }else{
+        throw new Error('奇数,无法执行')
+      }
+    }
+    try{
+      demo()
+    }catch(error){
+      console.log(error)
+    }
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./axios.js"></script>
+  <script>
+      axios.get('http://localhost:3000/personList')
+      .then((res)=>{
+      console.log('第1次请求',res)
+      return axios.get('http://localhost:3000/personList')
+      })
+      .then((res)=>{
+        console.log('第2次请求',res)
+        return axios.get('http://localhost:3000/personList')
+      })
+      .then((res)=>{
+        console.log('第3次请求',res)
+      })
+  </script>
+</body>
+</html>

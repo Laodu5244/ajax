@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let p = new Promise((resolve,reject)=>{
+      // 在executor中启动异步任务
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = () => {
+        if(xhr.readyState === 4){
+          if(xhr.status ===200){
+            resolve(xhr.response)
+          }else{
+            reject('请求出错了')
+          }
+        }
+      }
+      xhr.open('GET','http://localhost:3000/personList')
+      xhr.responseType = 'json'
+      xhr.send()   
+    }).then(
+      (value)=>{console.log(value)},
+      (reason)=>{console.log(reason)}
+    )
+    console.log('主线程')
+  </script>
+
+</body>
+</html>

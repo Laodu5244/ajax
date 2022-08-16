@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // 首字母大写的函数是构造函数
+    // 函数对象
+    function Person(name,age){
+      this.name = name
+      this.age = age
+    }
+    Person.a = 10
+    console.log(Person.a)
+    Person.name = 'jack'
+    // name属性不可更改(name是构造函数内置的只读属性)
+    console.log(Person.name)
+
+    // p1是Person的实例对象
+    let p1 = new Person('jack',18)
+    console.log(p1)
+  </script>
+</body>
+</html>

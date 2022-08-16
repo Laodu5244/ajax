@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let p = new Promise((resolve,reject)=>{
+      // 在executor中启动异步任务
+      setTimeout(() => {
+        resolve('异步的数据')
+      }, 1000);
+    }).then((value)=>{
+      console.log(value)
+    }).catch((reason)=>{
+      console.log(reason)
+    })
+    console.log('主线程')
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const p1 = new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        resolve('aaa')
+      }, 1000);
+    })
+    const p2 = new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        resolve('bbb')
+      }, 2000);
+    })
+    // .then方法
+    /* p1.then(res=>{
+      console.log(res)
+    }) */
+
+    // await只能接收成功的值,,接收不到失败的值
+    /* async function test(){
+      let result = await p1
+      console.log('成功了',result)
+    }
+    test() */
+
+    // 用try-catch接收失败的值
+    /* async function test(){
+      try {
+        let result = await p1
+        console.log('成功了',result)
+      } catch (error) {
+        console.log('失败了',error)
+      }
+    }
+    test() */
+
+    // 常用写法(前面加!或者;结束上一个语句,规避报错)
+    !(async()=>{
+      try{
+        let result1 = await p1
+        console.log('成功了',result1)
+        let result2 = await p2
+        console.log('成功了',result2)
+      }catch{
+        console.log('失败了',error)
+      }
+    })() //立即执行
+  </script>
+</body>
+</html>

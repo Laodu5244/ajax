@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Promise是window内置的构造函数
+    /* console.log(Promise) */
+
+    // 创建一个Promise实例对象
+    let p = new Promise((resolve,reject)=>{
+      resolve('ok')
+      // reject(666)
+    })
+    /* 
+      1. new Promise的时候要传一个回调函数
+      2. 它是同步回调,会立即在主线程上执行,它被称为executor函数
+      3. 每个Promise实例对象都有三种状态:初始化(pending),成功(fulfilled),失败(rejected)
+      4. 每个Promise实例对象被new出来那一刻,状态都是初始化(pending) 
+      5. executor函数接收两个参数:成功resolve,失败reject
+    */
+    console.log(p)
+    
+  </script>
+</body>
+
+</html>
