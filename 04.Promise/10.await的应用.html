@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const p = new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        resolve('aaa')
+      }, 1000);
+    })
+
+    // await必须写在async函数中
+    async function demo(){
+      let a = await p 
+      console.log(a)
+    }
+    demo()
+
+    // async函数可以没有await
+    async function demo1(){
+      let b = 123
+      console.log(b)
+    }
+    demo1()
+
+    // await等的一般是promise实例对象,也可以是其他值
+    async function demo2(){
+      let c = await 'hello world'
+      console.log(c)
+    }
+    demo2()
+  </script>
+</body>
+</html>
