@@ -1,0 +1,48 @@
+<!DOCTYPE ht"ml>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="./axios.min.js"></script>
+</head>
+<body>
+  <button id="btn">click</button>
+
+<script>
+let btn = document.querySelector('#btn')
+
+// 请求拦截器(发请求之前执行一个回调函数)
+axios.interceptors.request.use((config) => {
+  // 对所有请求做统一处理：
+  // 追加请求头，追加参数等
+  if(Date.now() % 2 === 0){
+    config.headers.token = 'hello world'
+  }
+  console.log('请求拦截器',config)
+  return config;
+})
+
+// 响应拦截器(得到响应后执行一个回调函数)
+axios.interceptors.response.use(
+  response =>{ 
+    console.log('响应成功了',response) 
+    if(Date.now() % 2 === 0){
+      return response
+    }else{
+      console.log('时间戳不是偶数，再点下试试')
+    }
+  },
+  error =>{ 
+    console.log('响应失败了',error) 
+    return new Promise(()=>{})
+  },
+)
+
+btn.onclick = async() => {
+  let result = await axios.get('https://jsonplaceholder.typicode.com/posts')
+  console.log(result.data.slice(0,10))
+}
+</script>
+
+</body>
+</html>
