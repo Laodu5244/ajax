@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="./axios.min.js"></script>
+</head>
+<body>
+  <button id="b1">get</button>
+  <button id="b2">post</button>
+<script>
+let b1 = document.querySelector('#b1')
+let b2 = document.querySelector('#b2')
+
+// 创建axios对象
+let instance = axios.create({
+  baseURL:'https://jsonplaceholder.typicode.com',
+  timeout:5000,
+  headers:{'X-Custon-Header':'foobar'}
+})
+
+// 请求拦截器
+instance.interceptors.request.use(
+  /* 此处一般做登录判断：如果用户是登录状态
+  会在headers中把用户的token传给后端 */
+  config => {return config},
+  error => {return Promise.reject(error)}
+)
+
+// 响应拦截器
+instance.interceptors.response.use(
+  // 后端给前端数据的时候，会有code码(200是成功)
+  res => {
+    return res;
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+
+// get请求
+b1.onclick = ()=>{
+  instance.get('/posts',{params:{
+      user:'laodu',  
+      password:'woaisi'
+  }}).then(res=>{
+    console.log(res.data.slice(0,5))
+  })
+}
+
+// post请求
+b2.onclick = ()=>{
+  instance.post('/posts',{
+    user:'laodu',
+    password:'woaisi'
+  })
+  .then(res=>{
+    console.log(res.data)
+  })
+}
+
+</script>
+
+</body>
+</html>
